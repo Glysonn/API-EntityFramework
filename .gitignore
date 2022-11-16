@@ -1,0 +1,4 @@
+# ignorando pastas
+.vscode/
+
+obj/Debug/net6.0
