@@ -1,4 +1,4 @@
-## C# Console Calculator - :books:
+## .NET API - :books:
 
 ## General info
 This project is a simple ASP NET API, using Entity Framework as ORM.
