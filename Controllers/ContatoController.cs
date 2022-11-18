@@ -42,5 +42,37 @@ namespace AulaEntityFramework.Controllers
 
             return Ok(contato);
         }
+
+        // recebe como parâmetro o id e o prórpio contato como json
+        // esse json do contato seria as informações atualizadas
+        [HttpPut("{id}")]
+        public IActionResult UpdateData(int id, Contato contato)
+        {
+            var ContatoBanco = _context.Contatos.Find(id);
+            if (ContatoBanco == null)
+                return NotFound();
+
+            ContatoBanco.Nome = contato.Nome;
+            ContatoBanco.Telefone = contato.Telefone;
+            ContatoBanco.Ativo = contato.Ativo;
+
+            _context.Contatos.Update(ContatoBanco);
+            _context.SaveChanges();
+
+            return Ok(ContatoBanco);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteData (int id)
+        {
+            var ContatoBanco = _context.Contatos.Find(id);
+            if (ContatoBanco == null)
+                return NotFound($"id {id} não existente!");
+
+            _context.Contatos.Remove(ContatoBanco);
+            _context.SaveChanges();
+            
+            return Ok($"{ContatoBanco.Nome} de id {ContatoBanco.Id} deletado!");
+        }
     }
 }
