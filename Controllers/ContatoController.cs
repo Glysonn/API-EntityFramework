@@ -43,6 +43,13 @@ namespace AulaEntityFramework.Controllers
             return Ok(contato);
         }
 
+        [HttpGet("ObterContatosNome")]
+        public IActionResult GetByName (string nome)
+        {
+            var contatos = _context.Contatos.Where(x=> x.Nome.Contains(nome));
+            return Ok(contatos);
+        }
+
         // recebe como parâmetro o id e o prórpio contato como json
         // esse json do contato seria as informações atualizadas
         [HttpPut("{id}")]
@@ -71,7 +78,7 @@ namespace AulaEntityFramework.Controllers
 
             _context.Contatos.Remove(ContatoBanco);
             _context.SaveChanges();
-            
+
             return Ok($"{ContatoBanco.Nome} de id {ContatoBanco.Id} deletado!");
         }
     }
